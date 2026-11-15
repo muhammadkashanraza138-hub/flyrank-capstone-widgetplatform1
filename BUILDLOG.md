@@ -13,3 +13,19 @@ The implementation was reviewed against the capstone brief. The final owner must
 
 ## Verification discipline
 No secret is placed in source. `.env.example` contains placeholders only. `EVIDENCE.md` is designed to hold real command output rather than invented claims.
+## Automated Testing
+
+Added automated tests for:
+- Required project files and widget versioning.
+- Submission schema validation.
+- Password minimum length validation.
+- Rate limiter request limits.
+- Rate limiter client separation.
+- Rate limiter window expiration.
+- API health endpoint.
+- Widget JavaScript endpoint.
+- JavaScript cache-control headers.
+
+Latest test result: 13 passed.
+
+Testing was performed using Docker Compose and pytest.
