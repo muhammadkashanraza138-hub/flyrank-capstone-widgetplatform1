@@ -40,3 +40,19 @@ def test_limiter_separates_clients():
     limiter = Limiter(limit=1, window=60)
     assert limiter.allow("client-1")
     assert limiter.allow("client-2")
+def test_rate_limiter_resets_after_window(monkeypatch):
+    current_time = [100.0]
+
+    monkeypatch.setattr(
+        "app.services.rate_limit.time.time",
+        lambda: current_time[0]
+    )
+
+    limiter = Limiter(limit=1, window=60)
+
+    assert limiter.allow("client-1") is True
+    assert limiter.allow("client-1") is False
+
+    current_time[0] = 161.0
+
+    assert limiter.allow("client-1") is True
